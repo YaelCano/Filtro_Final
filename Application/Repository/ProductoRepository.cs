@@ -27,14 +27,14 @@ namespace Application.Repository
         }
         public async Task<IEnumerable<object>> ListFrutis()
         {
-            var result = from dp in context.DetallePedido
-                         group dp by dp.codigo_producto into g
-                         let totalFacturado = g.Sum(dp => dp.precio_unidad * dp.cantidad)
+            var result = from dp in _context.DetallePedidos
+                         group dp by dp.CodigoProducto into g
+                         let totalFacturado = g.Sum(dp => dp.PrecioUnidad * dp.Cantidad)
                          where totalFacturado > 3000
                          select new
                          {
                              CodigoProducto = g.Key,
-                             UnidadesVendidas = g.Sum(dp => dp.cantidad),
+                             UnidadesVendidas = g.Sum(dp => dp.Cantidad),
                              TotalFacturado = totalFacturado,
                              TotalFacturadoConImpuestos = totalFacturado * 1.21
                          };
