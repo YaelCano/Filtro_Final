@@ -8,14 +8,15 @@ using Microsoft.EntityFrameworkCore;
 using Persistence.Data;
 
 namespace API.Repository
-{  public class GenericRepository<T> : IGeneric<T> where T : BaseEntity
+{
+    public class GenericStringRepository<T> : IGenericString<T> where T : BaseEntityString
     {
         private readonly FinalContext _context;
-
-        public GenericRepository(FinalContext context)
+        public GenericStringRepository(FinalContext context)
         {
             _context = context;
         }
+
         public virtual void Add(T entity)
         {
             _context.Set<T>().Add(entity);
@@ -55,7 +56,7 @@ namespace API.Repository
             return (totalRegistros, registros);
         }
 
-        public virtual async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T> GetByIdAsync(string id)
         {
             return await _context.Set<T>().FindAsync(id);
         }

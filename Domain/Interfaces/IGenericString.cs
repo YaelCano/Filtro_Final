@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Domain.Entities;
 
 namespace Domain.Interfaces
-{ 
-    public interface IGeneric<T> where T : BaseEntity
+{
+    public interface IGenericString<T> where T : BaseEntityString
     {
-        Task<T> GetByIdAsync(int id);
+        Task<T> GetByIdAsync(string Id);
         Task<IEnumerable<T>> GetAllAsync();
         Task<(int totalRegistros, IEnumerable<T> registros)> GetAllAsync(int pageindex, int pageSize);
         IEnumerable<T> Find(Func<T, bool> predicate);
@@ -18,4 +18,4 @@ namespace Domain.Interfaces
         void Delete(T entity);
         void DeleteRange(IEnumerable<T> entities);
     }
-} 
+}
